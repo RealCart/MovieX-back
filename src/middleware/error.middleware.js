@@ -3,7 +3,6 @@ function notFound(req, res) {
 }
 
 function errorHandler(err, req, res, next) {
-  // Handle mongoose duplicate key errors
   if (err && err.code === 11000) {
     return res.status(409).json({ error: "Duplicate key", details: err.keyValue });
   }

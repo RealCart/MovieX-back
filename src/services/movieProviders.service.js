@@ -1,11 +1,3 @@
-/**
- * External API integration (optional but recommended).
- * Providers:
- * - TMDB (token in env: TMDB_READ_TOKEN)
- * - OMDb (key in env: OMDB_API_KEY)
- * - Ghibli (no key)
- */
-
 function normalizeMovie({ provider, id, title, year, posterUrl, overview }) {
   return {
     provider,
@@ -88,7 +80,6 @@ async function searchAllProviders(query) {
   const results = await Promise.allSettled([searchTMDB(query), searchOMDb(query), searchGhibli(query)]);
   const merged = results.flatMap((p) => (p.status === "fulfilled" ? p.value : []));
 
-  // Basic de-dup by title+year
   const seen = new Set();
   const out = [];
   for (const m of merged) {

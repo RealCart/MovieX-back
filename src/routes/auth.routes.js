@@ -4,9 +4,6 @@ const { register, login } = require("../controllers/auth.controller");
 
 const router = express.Router();
 
-/**
- * Public: POST /api/auth/register
- */
 router.post(
   "/register",
   body("email").isEmail(),
@@ -19,9 +16,6 @@ router.post(
   }
 );
 
-/**
- * Public: POST /api/auth/login
- */
 router.post(
   "/login",
   body("email").isEmail(),

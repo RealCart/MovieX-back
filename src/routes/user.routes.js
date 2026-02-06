@@ -5,14 +5,8 @@ const { getProfile, updateProfile } = require("../controllers/user.controller");
 
 const router = express.Router();
 
-/**
- * Private: GET /api/users/profile
- */
 router.get("/profile", requireAuth, getProfile);
 
-/**
- * Private: PUT /api/users/profile
- */
 router.put(
   "/profile",
   requireAuth,

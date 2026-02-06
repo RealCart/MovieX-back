@@ -8,25 +8,23 @@ const authRoutes = require("./src/routes/auth.routes");
 const userRoutes = require("./src/routes/user.routes");
 const favoriteRoutes = require("./src/routes/favorite.routes");
 const externalRoutes = require("./src/routes/external.routes");
+const ratingRoutes = require("./src/routes/rating.routes");
 const { notFound, errorHandler } = require("./src/middleware/error.middleware");
 
 const app = express();
 
-// Core middleware
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 
-// Health check
 app.get("/", (req, res) => res.json({ ok: true, service: "movie-info-ratings-backend" }));
 
-// Routes
-app.use("/api/auth", authRoutes);        // public
-app.use("/api/users", userRoutes);       // private
-app.use("/api/favorites", favoriteRoutes); // private (CRUD resource)
-app.use("/api/external", externalRoutes);  // optional external integration
+app.use("/api/auth", authRoutes);       
+app.use("/api/users", userRoutes);      
+app.use("/api/favorites", favoriteRoutes); 
+app.use("/api/external", externalRoutes);  
+app.use("/api/ratings", ratingRoutes);
 
-// Error middleware
 app.use(notFound);
 app.use(errorHandler);
 

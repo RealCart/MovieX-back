@@ -1,12 +1,6 @@
 const Favorite = require("../models/Favorite");
 const Movie = require("../models/Movie");
 
-/**
- * Create favorite (user-owned resource).
- * Body can be either:
- * 1) { movieId } for local movies
- * 2) { provider, externalId, title, year?, posterUrl? } for external movies
- */
 async function createFavorite(req, res, next) {
   try {
     const { movieId, provider, externalId, title, year, posterUrl, note } = req.body;
@@ -68,7 +62,6 @@ async function getFavoriteById(req, res, next) {
 
 async function updateFavorite(req, res, next) {
   try {
-    // allow updating note and cached fields for external favorites
     const updates = {};
     if (typeof req.body.note === "string") updates.note = req.body.note;
     if (typeof req.body.title === "string") updates.title = req.body.title;

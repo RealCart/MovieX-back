@@ -4,10 +4,6 @@ const { searchExternalMovies } = require("../controllers/external.controller");
 
 const router = express.Router();
 
-/**
- * Optional external integration:
- * GET /api/external/movies/search?q=interstellar
- */
 router.get(
   "/movies/search",
   query("q").isString().isLength({ min: 1, max: 80 }),
