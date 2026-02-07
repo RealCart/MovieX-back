@@ -21,7 +21,12 @@ async function register(req, res, next) {
       username: username || ""
     });
 
-    res.status(201).json({ id: user._id, email: user.email, username: user.username });
+    const token = signToken(user);
+
+    return res.status(201).json({
+      token,
+      user: { id: user._id, email: user.email, username: user.username }
+    });
   } catch (e) {
     next(e);
   }
@@ -38,7 +43,10 @@ async function login(req, res, next) {
     if (!ok) return res.status(401).json({ error: "Invalid credentials" });
 
     const token = signToken(user);
-    res.json({ token });
+    return res.status(200).json({
+      token,
+      user: { id: user._id, email: user.email, username: user.username }
+    });
   } catch (e) {
     next(e);
   }
